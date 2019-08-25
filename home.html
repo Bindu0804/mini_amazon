@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+
+
+{% block body %}
+
+{% if session %}
+<center><p> welcome {{ session['username'] }}!</p>
+<p> you've signed in as  {{ session['c_type'] }}</p></center>
+
+{% if session['c_type'] =='buyer' %}
+<p><a href="/products">click here</a> to look at the products available for sale</p>
+<p><a href="/cart">click here</a> to look at your cart</p>
+
+{% else %}
+<p> Add products below</p>
+<center>
+<form action="/products" method="POST">
+  <input type="text" name="name" placeholder="enter product name"><br>
+  <input type="text" name="description" placeholder=" describe your product"><br>
+  <input type="text" name="price" placeholder=" enter your product price"><br>
+  <input type="text" name="quantity" placeholder=" enter your product quantity"><br>
+
+  <input type="submit" value="Add Product">
+</form>
+</center>
+<p><a href="/products">click here</a> to look at the products you've  added to the store</p>
+{% endif %}
+{% else %}
+
+<p>Login!</p>
+
+<form action="/login" method="POST">
+
+  <input type="text" name="username" placeholder="enter username..."><br>
+
+  <input type="password" name="password" placeholder="enter password..."><br>
+
+  <input type="submit" value="Login">
+
+
+
+</form>
+
+
+
+<p> Don't have an account? Sign Up!</p>
+
+<form action="/signup" method="POST">
+
+  Username:<br>
+
+  <input type="text" name="username" placeholder="username...">
+
+  <br>
+
+  Password:<br>
+
+  <input type="password" name="password1" placeholder="enter password..."><br><br>
+
+  Confirm Password:<br>
+
+  <input type="password" name="password2" placeholder="password again..."><br><br>
+
+  <input type="radio" name="type" value="buyer"> buyer<br>
+
+  <input type="radio" name="type" value="seller"> seller<br>
+
+  <br><br>
+
+  <input type="submit" value="submit">
+
+</form> 
+
+{% endif %}
+
+{% endblock body %}
